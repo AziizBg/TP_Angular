@@ -51,6 +51,7 @@ import { ProductsComponent } from "./products/products.component";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { AutocompleteComponent } from "./cv/autocomplete/autocomplete.component";
 import { SliderComponent } from "./rxjs/slider/slider.component";
+import { RainbowTypingDirective } from "./directives/RainbowTyping/rainbow-typing.directive";
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { SliderComponent } from "./rxjs/slider/slider.component";
     MiniWordComponent,
     NgclassComponent,
     HighlightDirective,
+    RainbowTypingDirective,
     Btc2usdPipe,
     TodoComponent,
     NavbarComponent,

@@ -1,8 +1,8 @@
-<div [style.backgroundColor]="divColor">
+<div [style.backgroundColor]="divColor" appRainbowTyping>
   Color
 </div>
 
-<input #inputColor (change)="changeColor(inputColor.value)" type="text" class="form-control">
+<input #inputColor appRainbowTyping (change)="changeColor(inputColor.value)" type="text" class="form-control">
 
 <button (click)="changeColor(defaultColor)" class="btn btn-warning">
   reset
