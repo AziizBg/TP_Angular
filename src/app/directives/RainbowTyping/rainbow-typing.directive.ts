@@ -1,4 +1,5 @@
 import { Directive, HostBinding, HostListener } from '@angular/core';
+import { ElementRef } from '@angular/core';
 
 @Directive({
   selector: 'input[appRainbowTyping]',
@@ -15,6 +16,15 @@ export class RainbowTypingDirective {
     this.color = color;
     this.borderColor= color;
   }
+
+  // methode2
+  // constructor(private el: ElementRef) {
+  //   if (this.el.nativeElement.tagName !== 'INPUT') {
+  //     // Si l'élément n'est pas un champ input, on arrête l'instanciation
+  //     return;
+  //   }
+  //   this.changeColor();
+  // }
 
   constructor() {
     this.changeColor();
