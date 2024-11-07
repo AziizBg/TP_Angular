@@ -1,4 +1,10 @@
-export type TodoStatus = 'waiting' | 'in progress'|'done';
+export type TodoStatus = 'waiting' | 'in progress' | 'done';
+
 export class Todo {
-  constructor(public name = '', public content = '', public status:TodoStatus='waiting') {}
+  constructor(
+    public name = '',
+    public content = '',
+    // new
+    public status: TodoStatus = 'waiting'
+  ) {}
 }

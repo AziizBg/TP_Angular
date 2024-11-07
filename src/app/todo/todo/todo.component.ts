@@ -4,22 +4,22 @@ import { TodoService } from '../service/todo.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-    selector: 'app-todo',
-    templateUrl: './todo.component.html',
-    styleUrls: ['./todo.component.css'],
-    providers: [TodoService],
-    standalone: true,
-    imports: [FormsModule],
+  selector: 'app-todo',
+  templateUrl: './todo.component.html',
+  styleUrls: ['./todo.component.css'],
+  providers: [TodoService],
+  standalone: true,
+  imports: [FormsModule],
 })
 export class TodoComponent {
   todos: Todo[] = [];
-  
+
   todos_s = signal<Todo[]>([]);
 
   todo = new Todo();
   constructor(private todoService: TodoService) {
     // this.todos = this.todoService.getTodos();
-    this.todos_s.set(this.todoService.getTodos())
+    this.todos_s.set(this.todoService.getTodos());
   }
   addTodo() {
     this.todoService.addTodo(this.todo);
@@ -30,17 +30,18 @@ export class TodoComponent {
     this.todoService.deleteTodo(todo);
   }
 
-  setInProgress( i:number){
+  // new code
+  setInProgress(i: number) {
     const temp_todos = this.todos_s();
-    temp_todos[i].status ='in progress';
+    temp_todos[i].status = 'in progress';
   }
 
-  setDone( i:number){
+  setDone(i: number) {
     const temp_todos = this.todos_s();
-    temp_todos[i].status ='done';
+    temp_todos[i].status = 'done';
   }
-  setWaiting( i:number){
+  setWaiting(i: number) {
     const temp_todos = this.todos_s();
-    temp_todos[i].status ='waiting';
+    temp_todos[i].status = 'waiting';
   }
 }
