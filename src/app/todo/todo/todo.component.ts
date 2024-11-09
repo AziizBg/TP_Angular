@@ -1,7 +1,8 @@
 import { Component, signal } from '@angular/core';
-import { Todo } from '../model/todo';
+import { Todo, TodoStatus } from '../model/todo';
 import { TodoService } from '../service/todo.service';
 import { FormsModule } from '@angular/forms';
+import { CONSTANTES } from 'src/config/const.config';
 
 @Component({
   selector: 'app-todo',
@@ -13,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class TodoComponent {
   todos: Todo[] = [];
+  CONSTANTS = CONSTANTES;
 
   todos_s = signal<Todo[]>([]);
 
@@ -30,18 +32,8 @@ export class TodoComponent {
     this.todoService.deleteTodo(todo);
   }
 
-  // new code
-  setInProgress(i: number) {
+  updateStatus(i: number, status: TodoStatus) {
     const temp_todos = this.todos_s();
-    temp_todos[i].status = 'in progress';
-  }
-
-  setDone(i: number) {
-    const temp_todos = this.todos_s();
-    temp_todos[i].status = 'done';
-  }
-  setWaiting(i: number) {
-    const temp_todos = this.todos_s();
-    temp_todos[i].status = 'waiting';
+    temp_todos[i].status = status;
   }
 }

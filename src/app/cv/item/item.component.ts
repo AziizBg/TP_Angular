@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter, input } from "@angular/core";
 import { Cv } from "../model/cv";
 import { CvService } from "../services/cv.service";
 import { NgStyle } from "@angular/common";
@@ -12,11 +12,12 @@ import { DefaultImagePipe } from "../pipes/default-image.pipe";
     imports: [NgStyle, DefaultImagePipe],
 })
 export class ItemComponent {
-  @Input({ required: true }) cv!: Cv;
+  // @Input({ required: true }) cv!: Cv;
+  cv = input.required<Cv>();
   @Input() size = 50;
   constructor(private cvService: CvService) {}
 
   onSelectCv() {
-    this.cvService.selectCv(this.cv);
+    this.cvService.selectCv(this.cv());
   }
 }

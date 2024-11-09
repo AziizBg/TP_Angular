@@ -1,3 +1,5 @@
+import { CONSTANTES } from "src/config/const.config";
+
 export type TodoStatus = 'waiting' | 'in progress' | 'done';
 
 export class Todo {
@@ -5,6 +7,6 @@ export class Todo {
     public name = '',
     public content = '',
     // new
-    public status: TodoStatus = 'waiting'
+    public status: TodoStatus = CONSTANTES.waiting
   ) {}
 }

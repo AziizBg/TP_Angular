@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { Cv } from '../model/cv';
 import { CvService } from '../services/cv.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,7 +16,7 @@ import { DefaultImagePipe } from '../pipes/default-image.pipe';
     imports: [DefaultImagePipe],
 })
 export class DetailsCvComponent implements OnInit {
-  cv: Cv | null = null;
+  cv: WritableSignal<Cv> = signal<Cv>(new Cv());
   constructor(
     private cvService: CvService,
     private router: Router,
@@ -29,7 +29,7 @@ export class DetailsCvComponent implements OnInit {
     const id = this.activatedRoute.snapshot.params['id'];
     this.cvService.getCvById(+id).subscribe({
         next: (cv) => {
-          this.cv = cv;
+          this.cv.set( cv);
         },
         error: (e) => {
           this.router.navigate([APP_ROUTES.cv]);

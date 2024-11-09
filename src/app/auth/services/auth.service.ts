@@ -6,6 +6,7 @@ import { API } from '../../../config/api.config';
 import { signal } from '@angular/core'; // Importation du signal
 import { catchError, Observable, of, tap } from 'rxjs';
 import { APP_ROUTES } from 'src/config/routes.config';
+import { CONSTANTES } from 'src/config/const.config';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +32,7 @@ export class AuthService {
     return this.http.post<LoginResponseDto>(API.login, credentials).pipe(
       tap((response) => {
         // Effet secondaire : stocker les détails de l'utilisateur et afficher un toast de succès
-        localStorage.setItem('token', response.id);
+        localStorage.setItem(CONSTANTES.token, response.id);
         this.storeUserDetails(response.userId.toString(), credentials.email);
       }),
       catchError((error) => {
@@ -46,18 +47,18 @@ export class AuthService {
 
   logout() {
     // Effacer les données et mettre à jour le signal
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userEmail');
+    localStorage.removeItem(CONSTANTES.token);
+    localStorage.removeItem(CONSTANTES.userId);
+    localStorage.removeItem(CONSTANTES.userEmail);
     this.userState.set({ id: null, email: null });
   }
 
   private loadUserState() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem(CONSTANTES.token);
     if (token) {
       // Si un token existe, on simule une requête pour récupérer l'ID et l'email de l'utilisateur
-      const userId = localStorage.getItem('userId');
-      const userEmail = localStorage.getItem('userEmail');
+      const userId = localStorage.getItem(CONSTANTES.userId);
+      const userEmail = localStorage.getItem(CONSTANTES.userEmail);
       if (userId && userEmail) {
         this.userState.set({
           id: userId,
@@ -69,8 +70,8 @@ export class AuthService {
 
   storeUserDetails(userId: string, userEmail: string) {
     // Stocker les informations de l'utilisateur dans localStorage
-    localStorage.setItem('userId', userId);
-    localStorage.setItem('userEmail', userEmail);
+    localStorage.setItem(CONSTANTES.userId, userId);
+    localStorage.setItem(CONSTANTES.userEmail, userEmail);
     this.userState.set({ id: userId, email: userEmail });
   }
 }
