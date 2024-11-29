@@ -1,3 +1,16 @@
 <form [formGroup]="form">
   <input type="text" class="form-control" formControlName="search" />
 </form>
+@if (filteredCvs.length > 0) {
+  <ul class="list-group mt-2">
+    @for (cv of filteredCvs; track cv.id) {
+      <li
+        (click)="selectCv(cv.id)"
+        class="list-group-item list-group-item-action"
+        style="cursor: pointer;"
+      >
+        <app-item [cv]="cv"></app-item>
+      </li>
+    }
+  </ul>
+}
