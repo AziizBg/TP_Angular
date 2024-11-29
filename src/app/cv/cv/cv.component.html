@@ -3,7 +3,37 @@
     <div class="alert alert-warning">
       {{ date | date : "full" | uppercase }}
     </div>
-    <app-list [cvs]="cvs$|async"></app-list>
+    <div>
+      <ul 
+        class="nav nav-tabs"
+        style="cursor: pointer;"
+      >
+        <li class="nav-item cursor">
+          <a
+            class="nav-link"
+            [class.active]="tab === 'junior'"
+            (click)="tab = 'junior'"
+          >
+            Juniors
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [class.active]="tab === 'senior'"
+            (click)="tab = 'senior'"
+          >
+            Seniors
+          </a>
+        </li>
+      </ul>
+      
+      <div>
+        <app-list *ngIf="tab === 'junior'" [cvs]=" cvJunior$ | async"></app-list>
+        <app-list *ngIf="tab === 'senior'" [cvs]=" cvSenior$ | async"></app-list>
+      </div>
+    </div>
+    
   </div>
   <div class="col">
     <app-cv-card [cv]="selectedCv$ | async"></app-cv-card>

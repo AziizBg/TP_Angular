@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Cv } from "../model/cv";
-import { Observable, Subject } from "rxjs";
+import { BehaviorSubject, Observable, Subject, map } from "rxjs";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { API } from "../../../config/api.config";
 
@@ -9,6 +9,9 @@ import { API } from "../../../config/api.config";
 })
 export class CvService {
   private cvs: Cv[] = [];
+  private cvsSubject = new BehaviorSubject<Cv[]>([]); 
+  cvs$ = this.cvsSubject.asObservable();
+
   /**
    * Le subject permettant de créer le flux des cvs sélectionnés
    */
@@ -43,7 +46,28 @@ export class CvService {
    *
    */
   getCvs(): Observable<Cv[]> {
-    return this.http.get<Cv[]>(API.cv);
+    if (!this.cvsSubject.value.length) {
+      this.http.get<Cv[]>(API.cv).subscribe((data) => this.cvsSubject.next(data));
+    }
+    return this.cvs$;
+  }
+
+  /**
+   * Retourne les CVs des juniors (age < 40)
+   */
+  getCvsJunior(): Observable<Cv[]> {
+    return this.cvs$.pipe(
+      map((cvs) => cvs.filter((cv) => cv.age < 40))
+    );
+  }
+
+  /**
+   * Retourne les CVs des seniors (age >= 40)
+   */
+  getCvsSenior(): Observable<Cv[]> {
+    return this.cvs$.pipe(
+      map((cvs) => cvs.filter((cv) => cv.age >= 40))
+    );
   }
 
   /**
@@ -76,7 +100,7 @@ export class CvService {
 
   /**
    *
-   * Cherche un cv avec son id dans lai liste fictive de cvs
+   * Cherche un cv avec son id dans la liste fictive de cvs
    *
    * @param id
    * @returns Cv | null

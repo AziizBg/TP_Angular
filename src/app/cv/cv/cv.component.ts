@@ -12,9 +12,12 @@ import { catchError, Observable, of } from 'rxjs';
 export class CvComponent {
   cvs: Cv[] = [];
   cvs$: Observable<Cv[]>;
+  cvJunior$: Observable<Cv[]>;
+  cvSenior$: Observable<Cv[]>;
   selectedCv: Cv | null = null;
   selectedCv$: Observable<Cv | null> ;
   date = new Date();
+  tab: 'junior' | 'senior' = 'junior';
 
   constructor(
     private logger: LoggerService,
@@ -41,7 +44,9 @@ export class CvComponent {
     //   Veuillez contacter l'admin.`);
     //   },
     // });
-    
+
+    this.cvJunior$ = this.cvService.getCvsJunior();
+    this.cvSenior$ = this.cvService.getCvsSenior();
     this.logger.logger('je suis le cvComponent');
     this.toastr.info('Bienvenu dans notre CvTech');
     // this.cvService.selectCv$.subscribe((cv) => (this.selectedCv = cv));
