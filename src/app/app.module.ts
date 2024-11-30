@@ -51,64 +51,69 @@ import { ProductsComponent } from "./products/products.component";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { AutocompleteComponent } from "./cv/autocomplete/autocomplete.component";
 import { SliderComponent } from "./rxjs/slider/slider.component";
+import {MasterDetailsCvComponent} from "./cv/master-details-cv/master-details-cv.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FirstComponent,
-    SecondComponent,
-    ColorComponent,
-    TwoComponent,
-    CardProfilComponent,
-    PereComponent,
-    FilsComponent,
-    AddCvComponent,
-    CvComponent,
-    ListComponent,
-    ItemComponent,
-    DetailsCvComponent,
-    CvCardComponent,
-    CardProfilComponent,
-    EmbaucheComponent,
-    DefaultImagePipe,
-    AutocompleteComponent,
-    NgstyleComponent,
-    MiniWordComponent,
-    NgclassComponent,
-    HighlightDirective,
-    Btc2usdPipe,
-    TodoComponent,
-    NavbarComponent,
-    FrontComponent,
-    AdminComponent,
-    NF404Component,
-    TestFormComponent,
-    LoginComponent,
-    TestObservableComponent,
-    SliderComponent,
-    TestHttpComponent,
-    RhComponent,
-    UserListComponent,
-    ProductsComponent,
-  ],
-  bootstrap: [AppComponent],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot(), // ToastrModule added
-    AppRoutingModule,
-    ReactiveFormsModule,
-    ServiceWorkerModule.register("ngsw-worker.js", {
-      enabled: !isDevMode(),
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: "registerWhenStable:30000",
-    }),
-  ],
-  providers: [
-    AuthInterceptorProvider,
-    provideHttpClient(withInterceptorsFromDi()),
-  ],
+    declarations: [
+        AppComponent,
+        FirstComponent,
+        SecondComponent,
+        ColorComponent,
+        TwoComponent,
+        CardProfilComponent,
+        PereComponent,
+        FilsComponent,
+        AddCvComponent,
+        CvComponent,
+        ListComponent,
+        ItemComponent,
+        DetailsCvComponent,
+        CvCardComponent,
+        CardProfilComponent,
+        EmbaucheComponent,
+        DefaultImagePipe,
+        AutocompleteComponent,
+        NgstyleComponent,
+        MiniWordComponent,
+        NgclassComponent,
+        HighlightDirective,
+        Btc2usdPipe,
+        TodoComponent,
+        NavbarComponent,
+        FrontComponent,
+        AdminComponent,
+        NF404Component,
+        TestFormComponent,
+        LoginComponent,
+        TestObservableComponent,
+        SliderComponent,
+        TestHttpComponent,
+        RhComponent,
+        UserListComponent,
+        ProductsComponent,
+        MasterDetailsCvComponent
+    ],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        BrowserAnimationsModule, // required animations module
+        ToastrModule.forRoot(), // ToastrModule added
+        AppRoutingModule,
+        ReactiveFormsModule,
+        ServiceWorkerModule.register("ngsw-worker.js", {
+            enabled: !isDevMode(),
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: "registerWhenStable:30000",
+        }),
+    ],
+    providers: [
+        AuthInterceptorProvider,
+        provideHttpClient(withInterceptorsFromDi()),
+    ],
+    exports: [
+        ListComponent
+    ]
 })
 export class AppModule {}

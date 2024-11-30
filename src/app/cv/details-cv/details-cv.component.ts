@@ -16,21 +16,21 @@ export class DetailsCvComponent implements OnInit {
   constructor(
     private cvService: CvService,
     private router: Router,
+    private route : ActivatedRoute,
     private activatedRoute: ActivatedRoute,
     private toastr: ToastrService,
     public authService: AuthService
   ) {}
 
   ngOnInit() {
-    const id = this.activatedRoute.snapshot.params['id'];
-    this.cvService.getCvById(+id).subscribe({
-        next: (cv) => {
-          this.cv = cv;
-        },
-        error: (e) => {
-          this.router.navigate([APP_ROUTES.cv]);
-        },
-      });
+    this.activatedRoute.data.subscribe({
+      next: (data) => {
+        this.cv = data['cv'];
+      },
+      error: () => {
+        this.router.navigate([APP_ROUTES.cv]);
+      },
+    });
   }
   deleteCv(cv: Cv) {
     this.cvService.deleteCvById(cv.id).subscribe({
