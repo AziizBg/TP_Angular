@@ -4,6 +4,7 @@ import {Cv} from "../model/cv";
 import {ToastrService} from "ngx-toastr";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs";
+import {APP_ROUTES} from "../../../config/routes.config";
 
 @Component({
   selector: 'app-master-details-cv',
@@ -24,7 +25,7 @@ export class MasterDetailsCvComponent implements OnInit, OnDestroy {
       this.cvs = data['cvs'];
     });
     this.clicksub = this.cvService.selectCv$.subscribe(cv => {
-      this.router.navigate(['cv','List',cv.id])
+      this.router.navigate([APP_ROUTES.cv,APP_ROUTES.list,cv.id])
     })
     }
   ngOnDestroy(): void {
