@@ -21,7 +21,7 @@ const routes: Route[] = [
     path: 'cv',
     loadChildren: () =>
       import('./cv-tech/cv-tech.module').then((m) => m.CvTechModule),
-    data: { preload: false},
+    data: { preload: true},
   },
   // {
   //   path: "cv",
