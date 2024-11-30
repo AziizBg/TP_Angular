@@ -9,7 +9,7 @@ import { API } from "../../../config/api.config";
 })
 export class CvService {
   private cvs: Cv[] = [];
-  private cvsSubject = new BehaviorSubject<Cv[]>([]); 
+  private cvsSubject = new BehaviorSubject<Cv[]>([]);
   cvs$ = this.cvsSubject.asObservable();
 
   /**
@@ -46,9 +46,7 @@ export class CvService {
    *
    */
   getCvs(): Observable<Cv[]> {
-    if (!this.cvsSubject.value.length) {
-      this.http.get<Cv[]>(API.cv).subscribe((data) => this.cvsSubject.next(data));
-    }
+    this.http.get<Cv[]>(API.cv).subscribe((data) => this.cvsSubject.next(data));
     return this.cvs$;
   }
 
