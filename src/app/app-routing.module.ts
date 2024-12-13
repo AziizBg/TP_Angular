@@ -14,7 +14,7 @@ import { DetailsCvComponent } from './cv/details-cv/details-cv.component';
 import { RhComponent } from './optimizationPattern/rh/rh.component';
 import { TtcComponent } from './components/ttc/ttc.component';
 
-const routes: Route[] = [
+export const routes: Route[] = [
   {
     path: 'login',
     loadComponent: () =>
@@ -91,9 +91,3 @@ const routes: Route[] = [
       ),
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}
