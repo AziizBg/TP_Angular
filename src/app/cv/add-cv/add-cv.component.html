@@ -3,14 +3,27 @@
   Name:
   <input type="text" class="form-control" formControlName="name" />
   <div
-    *ngIf="form.get('name')?.errors && form.get('name')?.touched"
+    *ngIf="name?.errors && name?.touched"
     class="alert alert-danger"
   >
     Ce champ est obligatoire
   </div>
   Firstname:
-  <input type="text" class="form-control" formControlName="firstname" /> Age:
-  <input type="text" class="form-control" formControlName="age" /> Cin:
+  <input type="text" class="form-control" formControlName="firstname" />
+  <div
+    *ngIf="firstname?.errors && firstname?.touched"
+    class="alert alert-danger"
+  >
+    Ce champ est obligatoire
+  </div>
+
+  Age:
+  <input type="text" class="form-control" formControlName="age" />
+  <div *ngIf="age?.errors && age.touched" class="alert alert-danger">
+    Ce champ est obligatoire
+  </div>
+
+  Cin:
   <input type="text" class="form-control" formControlName="cin" />
   <div
     *ngIf="
@@ -20,7 +33,14 @@
   >
     Cette Cin est invalide
   </div>
-  Job: <input type="text" class="form-control" formControlName="job" /> Path:
+  Job: <input type="text" class="form-control" formControlName="job" />
+  <div
+    *ngIf="job?.errors && job?.touched"
+    class="alert alert-danger"
+  >
+    Ce champ est obligatoire
+  </div>
+  Path:
   <input type="text" class="form-control" formControlName="path" />
 
   <button [disabled]="form.invalid" class="btn btn-primary" (click)="addCv()">
