@@ -24,8 +24,11 @@
     <div *ngIf="cin?.errors?.['required']" class="alert alert-danger"> Ce champ est obligatoire </div>
     <div *ngIf="cin?.errors?.['cinExists']" class="alert alert-danger"> Cette Cin est existante</div>
     <div *ngIf="cin?.errors?.['pattern']" class="alert alert-danger"> Cin doit être 8 caractères </div>
-    <div *ngIf="form.hasError('cinInvalid')" class="alert alert-danger"> Cette Cin est invalide (age et cin combatibilité)</div>
-
+  </div>
+  <div *ngIf="form?.errors && (form?.touched || form?.dirty)">
+    <div *ngIf="form.errors?.['cinInvalid']" class="alert alert-danger"> Cette Cin est invalide (age et cin
+      incompatibles)
+    </div>
   </div>
 
   Job: <input type="text" class="form-control" formControlName="job" />

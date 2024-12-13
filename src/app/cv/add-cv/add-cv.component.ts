@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import {
   AbstractControl,
   FormBuilder,
@@ -11,20 +11,20 @@ import { APP_ROUTES } from "src/config/routes.config";
 import { Cv } from "../model/cv";
 import { uniqueCinValidator } from "src/app/validators/uniqueCin-validator";
 import { cinAgeValidator } from "src/app/validators/cinAge-validator";
-import {CONSTANTES} from "../../../config/const.config";
+import { CONSTANTES } from "../../../config/const.config";
 
 @Component({
   selector: "app-add-cv",
   templateUrl: "./add-cv.component.html",
   styleUrls: ["./add-cv.component.css"],
 })
-export class AddCvComponent implements OnInit{
+export class AddCvComponent implements OnInit {
   constructor(
     private cvService: CvService,
     private router: Router,
     private toastr: ToastrService,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   form = this.formBuilder.group(
     {
@@ -47,7 +47,7 @@ export class AddCvComponent implements OnInit{
         },
       ],
     },
-    { validators: cinAgeValidator }
+    { validators: cinAgeValidator() }
   );
   ngOnInit() {
     this.age?.valueChanges.subscribe((age) => {
