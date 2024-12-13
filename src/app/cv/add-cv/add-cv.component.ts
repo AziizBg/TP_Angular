@@ -9,6 +9,8 @@ import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { APP_ROUTES } from "src/config/routes.config";
 import { Cv } from "../model/cv";
+import { uniqueCinValidator } from "src/app/validators/uniqueCin-validator";
+import { cinAgeValidator } from "src/app/validators/cinAge-validator";
 
 @Component({
   selector: "app-add-cv",
@@ -33,6 +35,8 @@ export class AddCvComponent implements OnInit{
         "",
         {
           validators: [Validators.required, Validators.pattern("[0-9]{8}")],
+          asyncValidators: [uniqueCinValidator(this.cvService)],
+          updateOn: "blur",
         },
       ],
       age: [
@@ -42,6 +46,7 @@ export class AddCvComponent implements OnInit{
         },
       ],
     },
+    { validators: cinAgeValidator }
   );
   ngOnInit() {
     this.age?.valueChanges.subscribe((age) => {

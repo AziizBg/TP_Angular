@@ -2,18 +2,12 @@
 <form [formGroup]="form">
   Name:
   <input type="text" class="form-control" formControlName="name" />
-  <div
-    *ngIf="name?.errors && name?.touched"
-    class="alert alert-danger"
-  >
+  <div *ngIf="name?.errors && name?.touched" class="alert alert-danger">
     Ce champ est obligatoire
   </div>
   Firstname:
   <input type="text" class="form-control" formControlName="firstname" />
-  <div
-    *ngIf="firstname?.errors && firstname?.touched"
-    class="alert alert-danger"
-  >
+  <div *ngIf="firstname?.errors && firstname?.touched" class="alert alert-danger">
     Ce champ est obligatoire
   </div>
 
@@ -25,19 +19,17 @@
 
   Cin:
   <input type="text" class="form-control" formControlName="cin" />
-  <div
-    *ngIf="
-      form.errors && form.errors['cinFirstCars'] && cin?.touched && age?.touched
-    "
-    class="alert alert-danger"
-  >
-    Cette Cin est invalide
+  <div *ngIf="cin?.errors && cin?.touched">
+    <!-- <div *ngIf="form.errors['cinFirstCars']" class="alert alert-danger"> Cette Cin est invalide</div> -->
+    <div *ngIf="cin?.errors?.['required']" class="alert alert-danger"> Ce champ est obligatoire </div>
+    <div *ngIf="cin?.errors?.['cinExists']" class="alert alert-danger"> Cette Cin est existante</div>
+    <div *ngIf="cin?.errors?.['pattern']" class="alert alert-danger"> Cin doit être 8 caractères </div>
+    <div *ngIf="form.hasError('cinInvalid')" class="alert alert-danger"> Cette Cin est invalide (age et cin combatibilité)</div>
+
   </div>
+
   Job: <input type="text" class="form-control" formControlName="job" />
-  <div
-    *ngIf="job?.errors && job?.touched"
-    class="alert alert-danger"
-  >
+  <div *ngIf="job?.errors && job?.touched" class="alert alert-danger">
     Ce champ est obligatoire
   </div>
   Path:
